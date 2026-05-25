@@ -175,7 +175,7 @@ function Question({
         <div className="mt-7">
           <div className="mb-3 flex items-baseline justify-between">
             <span className="text-sm font-semibold text-ink">Category</span>
-            <span className="text-2xs text-ink-faint">Pick one of 11</span>
+            <span className="text-2xs text-ink-faint">Pick one of 13</span>
           </div>
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
             {CATEGORIES.map((c) => (

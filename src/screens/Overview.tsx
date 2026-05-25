@@ -12,7 +12,7 @@ import { Check, ArrowRight, Lock, ArrowLeft } from '../components/icons';
 
 const SECTION_META: { id: SectionId; label: string; blurb: string }[] = [
   { id: 'why', label: 'Why this matters', blurb: 'Your role' },
-  { id: 'categories', label: 'The 11 categories', blurb: '11 cards' },
+  { id: 'categories', label: 'The 13 categories', blurb: '13 cards' },
   { id: 'naming', label: 'Naming documents', blurb: 'The formula' },
   { id: 'priority', label: 'Priority triage', blurb: 'Normal vs abnormal' },
   { id: 'mistakes', label: 'Common mistakes', blurb: '10 to acknowledge' },

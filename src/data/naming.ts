@@ -69,6 +69,11 @@ export const NAMING: NamingRules = {
       example: 'RVH Mammography — Patient no-showed appointment',
     },
     {
+      trigger: 'Multiple results of the same category in one fax',
+      rule: 'Classify by the shared category and combine the results in the description. Flag abnormal if ANY result is abnormal.',
+      example: 'Echocardiogram and Stress Test Reports',
+    },
+    {
       trigger: 'Junk',
       rule: 'Set documentDescription to null.',
       example: null,

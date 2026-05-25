@@ -49,10 +49,9 @@ export const PRIORITY: PriorityRules = {
         "Concerning language: 'worrisome', 'suspicious', 'malignant', 'cannot rule out'",
         'Patient seen in ER or admitted',
         'Specialist discharging patient back with new management plan',
-        'Declined / returned referral that needs resubmission or leaves a symptomatic patient unseen',
       ],
       normalIf:
-        "Reassuring findings, no new diagnosis, 'no significant abnormalities', routine follow-up, stable chronic condition. Routine referral-workflow notices (appointment confirmations, unable-to-reach) with no urgency.",
+        "Reassuring findings, no new diagnosis, 'no significant abnormalities', routine follow-up, stable chronic condition.",
     },
     Radiology: {
       abnormalIfAny: [
@@ -141,6 +140,28 @@ export const PRIORITY: PriorityRules = {
       ],
       normalIf:
         'Generally healthy patient, all historical issues well-documented and managed, no outstanding follow-up, records >10 years old with no ongoing relevance.',
+    },
+    Referral: {
+      abnormalIfAny: [
+        'Urgent clinical concerns, time-sensitive language, or serious suspected diagnoses requiring prompt physician review',
+        'Incomplete referral missing necessary supporting documents where follow-up is needed',
+        'Appointment notification where the patient no-showed or did not attend',
+        'Appointment could not be booked for any reason (including declined / returned referrals)',
+        'Patient cancelled the appointment',
+        'Patient could not be reached by the specialist office',
+      ],
+      normalIf:
+        'Straightforward routine referral with no urgency signals; routine appointment confirmation or scheduling notification with no negative status.',
+    },
+    Photo: {
+      abnormalIfAny: [
+        'Note describes a rapidly changing lesion, bleeding, ulceration, asymmetry, irregular borders, colour variation, diameter >6mm, or evolving characteristics',
+        'Cover letter expresses concern — “rule out malignancy”, “suspicious”, “biopsy recommended”',
+        'Signs of infection, burns, wounds, or trauma',
+        'Image quality too poor to assess, with little or no context (err on the side of caution)',
+      ],
+      normalIf:
+        'Routine documentation of a known benign condition; pre/post-treatment photos showing expected progress; documentation only with no clinical concern.',
     },
     Others: {
       abnormalIfAny: [

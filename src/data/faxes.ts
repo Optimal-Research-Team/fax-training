@@ -460,12 +460,12 @@ export const FAXES: TestFax[] = [
       snippet:
         'APPOINTMENT CONFIRMATION. Patient Smith, John is scheduled with Dr. Patel on 2026-06-12 at 10:30 AM. Referral received and accepted.',
     },
-    correctCategory: 'Consult',
+    correctCategory: 'Referral',
     correctPriority: 'normal',
     suggestedDescription: 'Cardiology — Appointment confirmation',
     teachingNote:
-      'A specialist confirming an appointment from a referral you sent. Avaros has no “Referral” category, so file it as Consult — “Referral” is only the AI sorter’s internal label. Routine confirmation → Normal.',
-    guardrailId: 'referral-is-consult',
+      'A specialist confirming an appointment from a referral you sent → Referral. There is no clinical consult note here, so it is not Consult. Routine confirmation with no negative status → Normal.',
+    guardrailId: 'referral-strict',
   },
   {
     id: 34,
@@ -475,12 +475,12 @@ export const FAXES: TestFax[] = [
       snippet:
         'UNABLE TO REACH PATIENT. We have called 3 times over 2 weeks to schedule. Returning referral to source. Please ask patient to contact our office if they wish to rebook.',
     },
-    correctCategory: 'Consult',
-    correctPriority: 'normal',
+    correctCategory: 'Referral',
+    correctPriority: 'abnormal',
     suggestedDescription: 'Dermatology — Unable to reach patient',
     teachingNote:
-      'An unable-to-reach notice is a referral-workflow communication. There is no “Referral” category in Avaros, so it files as Consult. No urgent clinical content → Normal.',
-    guardrailId: 'referral-is-consult',
+      'An unable-to-reach notice is referral workflow → Referral. Under the Referral priority rules, “patient could not be reached by the specialist office” is flagged Abnormal — the patient is slipping through the cracks and needs follow-up.',
+    guardrailId: 'referral-strict',
   },
   {
     id: 35,
@@ -490,12 +490,12 @@ export const FAXES: TestFax[] = [
       snippet:
         'DECLINED. The referral for Mr. K. does not meet our intake criteria as recent CBC and ferritin are missing. Please resubmit with required workup. Patient remains symptomatic per your note.',
     },
-    correctCategory: 'Consult',
+    correctCategory: 'Referral',
     correctPriority: 'abnormal',
     suggestedDescription: 'Hematology — Referral rejection from RVH',
     teachingNote:
-      'A declined consult referral files as Consult (Avaros has no “Referral” category). Include the specialty and the rejection concept in the description. Mark abnormal because the patient is symptomatic and we need to resubmit/act.',
-    guardrailId: 'referral-is-consult',
+      'A specialist’s cover letter rejecting/declining a referral → Referral (not Consult). Include the specialty and the rejection concept in the name. Declined referral with a symptomatic patient → Abnormal.',
+    guardrailId: 'returned-req-by-service',
   },
   {
     id: 36,
@@ -710,5 +710,79 @@ export const FAXES: TestFax[] = [
     suggestedDescription: 'X-ray Report — Wrist',
     teachingNote:
       'When the impression/findings are largely illegible, default to abnormal (err on the side of caution per the priority rules). The signing credential FRCPC and DI letterhead still place this in Radiology.',
+  },
+  {
+    id: 51,
+    display: {
+      sender: 'Barrie Skin & Laser Clinic',
+      pages: 1,
+      snippet:
+        'Clinical photograph — lesion, left cheek. Cover note: irregular borders, recent colour change and intermittent bleeding over 6 weeks. Please assess — rule out malignancy.',
+    },
+    correctCategory: 'Photo',
+    correctPriority: 'abnormal',
+    suggestedDescription: 'Photo — Skin lesion, left cheek',
+    teachingNote:
+      'A patient photograph (rare via fax) → Photo, not Consult. The note describes a changing, bleeding lesion and asks to “rule out malignancy” → Abnormal.',
+  },
+  {
+    id: 52,
+    display: {
+      sender: 'Barrie Family Health Team',
+      pages: 3,
+      snippet:
+        'Patient Intake Questionnaire. Medical history, current medications, family history, lifestyle. Completed and signed by the patient. Not attached to any consult or referral.',
+    },
+    correctCategory: 'Others',
+    correctPriority: 'normal',
+    suggestedDescription: 'Patient intake questionnaire',
+    teachingNote:
+      'A standalone questionnaire not attached to a consult or referral → Others (not Consult or Referral). If it were bundled inside a consult/referral, you would classify by that parent document.',
+    guardrailId: 'questionnaires-are-others',
+  },
+  {
+    id: 53,
+    display: {
+      sender: 'Optimal Family Health Clinic — Front Desk',
+      pages: 2,
+      snippet:
+        'New Patient Registration & Consent. Patient acknowledges clinic policies, fees for uninsured services, and the PHIPA collection notice. No records-transfer or chart-copy request. Signed by patient.',
+    },
+    correctCategory: 'Others',
+    correctPriority: 'normal',
+    suggestedDescription: 'New-patient registration & consent (clinic policies)',
+    teachingNote:
+      'A new-patient onboarding consent is a legal instrument in a technical sense, but there is no external legal counterparty and no records-transfer intent → Others, not Legal and not Oldchart.',
+    guardrailId: 'legal-active-counterparty',
+  },
+  {
+    id: 54,
+    display: {
+      sender: 'WELL Health Diagnostic Centre',
+      pages: 2,
+      snippet:
+        'Appointment notification: your patient is booked for an MRI lumbar spine on 2026-06-18 at 09:00. Original requisition attached for reference. Please ask the patient to arrive 15 minutes early.',
+    },
+    correctCategory: 'Radiology',
+    correctPriority: 'normal',
+    suggestedDescription: 'WELL Health — MRI appointment notification',
+    teachingNote:
+      'From a diagnostic-imaging centre → Radiology by default, even though it’s an appointment notification with the original requisition appended. Use the notification date, not the requisition date. Not Referral.',
+    guardrailId: 'imaging-centre-is-radiology',
+  },
+  {
+    id: 55,
+    display: {
+      sender: 'Newmarket Cardiology',
+      pages: 5,
+      snippet:
+        'Two studies enclosed. (1) Transthoracic echocardiogram: LVEF 40%, moderate LV systolic dysfunction. (2) Stress test: inducible ischemia at moderate workload. Both signed: Dr. R. Patel, FRCPC Cardiology.',
+    },
+    correctCategory: 'Imaging',
+    correctPriority: 'abnormal',
+    suggestedDescription: 'Echocardiogram and Stress Test Reports',
+    teachingNote:
+      'Two cardiology studies in one fax, both cardiologist-signed → Imaging. Combine them in the description, and flag Abnormal because at least one result is abnormal (reduced LVEF + inducible ischemia).',
+    guardrailId: 'radiology-vs-imaging',
   },
 ];

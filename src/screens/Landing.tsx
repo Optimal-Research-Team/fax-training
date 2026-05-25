@@ -65,7 +65,8 @@ export function Landing() {
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">
               Our AI classifier is fast — but it isn’t perfect. This module
               teaches you the exact ruleset it follows, then tests your judgment
-              on 50 realistic faxes so you can verify and correct its work.
+              on {FAXES.length} realistic faxes so you can verify and correct its
+              work.
             </p>
 
             {/* Resume / CTA states */}
@@ -122,12 +123,12 @@ export function Landing() {
                 n={1}
                 icon={<BookOpen className="h-5 w-5" />}
                 title="Interactive overview"
-                body="Click through the 11 categories, the naming formula, priority triage, and the 10 common mistakes."
+                body="Click through the 13 categories, the naming formula, priority triage, and the common-mistake guardrails."
               />
               <StepCard
                 n={2}
                 icon={<Target className="h-5 w-5" />}
-                title="50-question practice test"
+                title={`${FAXES.length}-question practice test`}
                 body="Pick a category and priority for each fax. Get instant feedback and a scored breakdown."
               />
             </div>
@@ -141,7 +142,7 @@ export function Landing() {
                 <div className="mb-3 flex items-center justify-between px-1">
                   <span className="eyebrow">Sample question</span>
                   <span className="text-2xs font-medium text-ink-faint">
-                    Question 2 / 50
+                    Question 2 / {FAXES.length}
                   </span>
                 </div>
                 <FaxPreview fax={TEASER_FAX} />
@@ -186,7 +187,7 @@ export function Landing() {
               ))}
             </div>
             <p className="text-2xs text-ink-faint">
-              11 categories · 2 priority levels · localStorage progress
+              13 categories · 2 priority levels · localStorage progress
             </p>
           </div>
         </footer>

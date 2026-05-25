@@ -19,7 +19,7 @@ export function Categories() {
       <header>
         <span className="eyebrow">Section 2</span>
         <h2 className="display-tight mt-2 text-3xl font-semibold sm:text-4xl">
-          The 11 categories
+          The 13 categories
         </h2>
         <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
           Every fax lands in exactly one of these. The color coding matches your
