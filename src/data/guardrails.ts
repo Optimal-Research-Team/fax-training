@@ -17,9 +17,9 @@ export const GUARDRAILS: Guardrail[] = [
     rule: 'A cardiac MRI signed by a radiologist is Radiology. The same scan signed by a cardiologist is Imaging. The procedure name is irrelevant. If the signing provider’s specialty cannot be determined, default to Radiology.',
   },
   {
-    id: 'referral-strict',
-    title: "Referral ≠ just seeing the word 'referral'",
-    rule: 'Only use Referral for specialist workflow communications: appointment confirmations, unable-to-reach notices, declined referrals, or requests for more info. Demographics, fax headers, or "referral" in a subject line alone do not qualify.',
+    id: 'referral-is-consult',
+    title: 'Referral-workflow faxes → Consult (there is no Referral category)',
+    rule: 'Avaros has no “Referral” category — that label only exists inside the AI fax sorter. Appointment confirmations, unable-to-reach notices, requests for more info, and declined consult referrals from specialists you referred to are all filed as Consult. (Returned diagnostic/lab requisitions still go by their service — see the returned-requisition rule.)',
   },
   {
     id: 'mychart-is-oldchart',

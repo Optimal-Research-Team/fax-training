@@ -65,7 +65,7 @@ export const NAMING: NamingRules = {
     },
     {
       trigger: 'Returned requisition with status annotation',
-      rule: 'Format as "[Sender] [Service type] — [Annotation]". Classify by service category, NOT as Referral.',
+      rule: 'Format as "[Sender] [Service type] — [Annotation]". Classify by the service category (e.g. mammography → Radiology), not by the fact that it was returned.',
       example: 'RVH Mammography — Patient no-showed appointment',
     },
     {

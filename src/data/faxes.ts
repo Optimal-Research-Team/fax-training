@@ -460,11 +460,12 @@ export const FAXES: TestFax[] = [
       snippet:
         'APPOINTMENT CONFIRMATION. Patient Smith, John is scheduled with Dr. Patel on 2026-06-12 at 10:30 AM. Referral received and accepted.',
     },
-    correctCategory: 'Referral',
+    correctCategory: 'Consult',
     correctPriority: 'normal',
     suggestedDescription: 'Cardiology — Appointment confirmation',
     teachingNote:
-      'Specialist confirming the appointment from a referral you sent → Referral. Routine confirmation → Normal.',
+      'A specialist confirming an appointment from a referral you sent. Avaros has no “Referral” category, so file it as Consult — “Referral” is only the AI sorter’s internal label. Routine confirmation → Normal.',
+    guardrailId: 'referral-is-consult',
   },
   {
     id: 34,
@@ -474,11 +475,12 @@ export const FAXES: TestFax[] = [
       snippet:
         'UNABLE TO REACH PATIENT. We have called 3 times over 2 weeks to schedule. Returning referral to source. Please ask patient to contact our office if they wish to rebook.',
     },
-    correctCategory: 'Referral',
+    correctCategory: 'Consult',
     correctPriority: 'normal',
     suggestedDescription: 'Dermatology — Unable to reach patient',
     teachingNote:
-      'Unable-to-reach is a referral workflow notice → Referral. No urgent clinical content → Normal.',
+      'An unable-to-reach notice is a referral-workflow communication. There is no “Referral” category in Avaros, so it files as Consult. No urgent clinical content → Normal.',
+    guardrailId: 'referral-is-consult',
   },
   {
     id: 35,
@@ -488,11 +490,12 @@ export const FAXES: TestFax[] = [
       snippet:
         'DECLINED. The referral for Mr. K. does not meet our intake criteria as recent CBC and ferritin are missing. Please resubmit with required workup. Patient remains symptomatic per your note.',
     },
-    correctCategory: 'Referral',
+    correctCategory: 'Consult',
     correctPriority: 'abnormal',
     suggestedDescription: 'Hematology — Referral rejection from RVH',
     teachingNote:
-      'Declined referral requiring action from us. Include the specialty and the rejection concept in the description. Mark abnormal because the patient is symptomatic and we need to act.',
+      'A declined consult referral files as Consult (Avaros has no “Referral” category). Include the specialty and the rejection concept in the description. Mark abnormal because the patient is symptomatic and we need to resubmit/act.',
+    guardrailId: 'referral-is-consult',
   },
   {
     id: 36,
@@ -506,7 +509,7 @@ export const FAXES: TestFax[] = [
     correctPriority: 'normal',
     suggestedDescription: 'RVH Mammography — Patient no-showed appointment',
     teachingNote:
-      "Returned requisition → classify by the SERVICE (mammography), not as Referral. Format the description as '[Sender] [Service] — [Annotation]'.",
+      "Returned requisition → classify by the SERVICE (mammography) → Radiology, not by the fact that it bounced back. Format the description as '[Sender] [Service] — [Annotation]'.",
     guardrailId: 'returned-req-by-service',
   },
   {
@@ -691,7 +694,7 @@ export const FAXES: TestFax[] = [
     correctPriority: 'normal',
     suggestedDescription: 'Innisfil Cardiology — Referral declined',
     teachingNote:
-      "Returned requisition for a CONSULT (cardiology) service → classify by the service. NOT Referral, NOT Others. Format the description as '[Sender] [Service] — [Annotation]'.",
+      "Returned requisition for a CONSULT (cardiology) service → classify by the service → Consult, not Others. Format the description as '[Sender] [Service] — [Annotation]'.",
     guardrailId: 'returned-req-by-service',
   },
   {

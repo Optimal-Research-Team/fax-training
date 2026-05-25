@@ -49,9 +49,10 @@ export const PRIORITY: PriorityRules = {
         "Concerning language: 'worrisome', 'suspicious', 'malignant', 'cannot rule out'",
         'Patient seen in ER or admitted',
         'Specialist discharging patient back with new management plan',
+        'Declined / returned referral that needs resubmission or leaves a symptomatic patient unseen',
       ],
       normalIf:
-        "Reassuring findings, no new diagnosis, 'no significant abnormalities', routine follow-up, stable chronic condition.",
+        "Reassuring findings, no new diagnosis, 'no significant abnormalities', routine follow-up, stable chronic condition. Routine referral-workflow notices (appointment confirmations, unable-to-reach) with no urgency.",
     },
     Radiology: {
       abnormalIfAny: [
@@ -140,14 +141,6 @@ export const PRIORITY: PriorityRules = {
       ],
       normalIf:
         'Generally healthy patient, all historical issues well-documented and managed, no outstanding follow-up, records >10 years old with no ongoing relevance.',
-    },
-    Referral: {
-      abnormalIfAny: [
-        'Urgent clinical concerns, time-sensitive language, serious suspected diagnoses',
-        'Clearly requires prompt physician review',
-        'Incomplete referral missing necessary supporting documents where follow-up is needed',
-      ],
-      normalIf: 'Straightforward routine referral with no urgency signals.',
     },
     Others: {
       abnormalIfAny: [

@@ -1,7 +1,9 @@
 import type { ProgressState } from '../data/types';
 import { FAXES } from '../data/faxes';
 
-const KEY = 'fax_training_progress_v1';
+// v2: the “Referral” category was removed (Avaros files those as Consult),
+// so any v1 state may hold an invalid category selection — start clean.
+const KEY = 'fax_training_progress_v2';
 
 export function makeInitialState(): ProgressState {
   return {

@@ -122,7 +122,7 @@ export function Landing() {
                 n={1}
                 icon={<BookOpen className="h-5 w-5" />}
                 title="Interactive overview"
-                body="Click through the 12 categories, the naming formula, priority triage, and the 10 common mistakes."
+                body="Click through the 11 categories, the naming formula, priority triage, and the 10 common mistakes."
               />
               <StepCard
                 n={2}
@@ -186,7 +186,7 @@ export function Landing() {
               ))}
             </div>
             <p className="text-2xs text-ink-faint">
-              12 categories · 2 priority levels · localStorage progress
+              11 categories · 2 priority levels · localStorage progress
             </p>
           </div>
         </footer>

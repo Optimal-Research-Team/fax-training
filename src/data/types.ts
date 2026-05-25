@@ -6,7 +6,6 @@ export type CategoryId =
   | 'Pathology'
   | 'Prescription'
   | 'Insurance'
-  | 'Referral'
   | 'Legal'
   | 'Oldchart'
   | 'Others'
