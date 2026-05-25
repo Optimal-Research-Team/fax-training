@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { TopBar } from '../components/TopBar';
 import { Button } from '../components/Button';
 import { useProgress, OVERVIEW_SECTIONS, type SectionId } from '../context/ProgressContext';
+import { GUARDRAILS } from '../data/guardrails';
 import { WhyThisMatters } from './sections/WhyThisMatters';
 import { Categories } from './sections/Categories';
 import { Naming } from './sections/Naming';
@@ -15,7 +16,11 @@ const SECTION_META: { id: SectionId; label: string; blurb: string }[] = [
   { id: 'categories', label: 'The 13 categories', blurb: '13 cards' },
   { id: 'naming', label: 'Naming documents', blurb: 'The formula' },
   { id: 'priority', label: 'Priority triage', blurb: 'Normal vs abnormal' },
-  { id: 'mistakes', label: 'Common mistakes', blurb: '10 to acknowledge' },
+  {
+    id: 'mistakes',
+    label: 'Common mistakes',
+    blurb: `${GUARDRAILS.length} to acknowledge`,
+  },
 ];
 
 const SECTION_COMPONENTS: Record<SectionId, React.FC> = {
@@ -198,7 +203,7 @@ function StartTestButton({
       title={
         enabled
           ? undefined
-          : 'Visit all 5 sections and acknowledge all 10 mistakes first'
+          : 'Visit all 5 sections and acknowledge every mistake card first'
       }
     >
       {enabled ? null : <Lock className="h-4 w-4" />}

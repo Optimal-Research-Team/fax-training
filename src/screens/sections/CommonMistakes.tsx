@@ -18,9 +18,9 @@ export function CommonMistakes() {
           Common mistakes
         </h2>
         <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
-          These ten traps account for most misclassifications. Flip each card to
-          read the correction, then mark it as understood — you’ll need all ten
-          acknowledged before the test unlocks.
+          These {totalMistakes} traps account for most misclassifications. Flip
+          each card to read the correction, then mark it as understood — you’ll
+          need all {totalMistakes} acknowledged before the test unlocks.
         </p>
         <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-brand-soft px-3 py-1.5 text-[13px] font-semibold text-brand-ink">
           <Check className="h-4 w-4" />
