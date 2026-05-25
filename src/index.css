@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-paper text-ink-soft font-sans antialiased;
+    font-feature-settings: "cv11", "ss01", "cv02";
+    margin: 0;
+  }
+
+  h1, h2, h3, h4 {
+    @apply text-ink font-display;
+    font-optical-sizing: auto;
+  }
+
+  ::selection {
+    background: rgba(15, 110, 86, 0.16);
+  }
+
+  /* Refined focus ring */
+  :focus-visible {
+    outline: none;
+    @apply shadow-focus rounded-lg;
+  }
+}
+
+@layer components {
+  .display-tight {
+    letter-spacing: -0.02em;
+    line-height: 1.04;
+  }
+
+  .eyebrow {
+    @apply text-2xs font-semibold uppercase tracking-[0.14em] text-ink-muted;
+  }
+
+  /* OCR / fax snippet look */
+  .ocr {
+    @apply font-mono text-[13px] leading-relaxed text-ink-soft;
+    font-feature-settings: "calt" 0;
+  }
+
+  .card {
+    @apply rounded-2xl border border-line bg-surface shadow-card;
+  }
+
+  /* Hide scrollbar but keep scroll */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Thin styled scrollbar */
+  .thin-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+  .thin-scroll::-webkit-scrollbar-thumb {
+    background: #DCD7CB; border-radius: 999px; border: 2px solid transparent; background-clip: padding-box;
+  }
+  .thin-scroll::-webkit-scrollbar-track { background: transparent; }
+}
+
+/* Paper / faint dot texture for hero panels */
+.dot-grid {
+  background-image: radial-gradient(rgba(27,26,23,0.05) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
